@@ -10,11 +10,14 @@ import java.util.List;
 @RequestMapping("/api/reclamos")
 public class ReclamoController {
 
+    private final ReclamoService reclamoService;
+
+    public ReclamoController(ReclamoService reclamoService) {
+        this.reclamoService = reclamoService;
+    }
+
     @GetMapping
     public List<Reclamo> listarReclamos() {
-        return List.of(
-                new Reclamo(1L, "Demora en la entrega del producto", "PENDIENTE"),
-                new Reclamo(2L, "Producto recibido con daños", "EN_REVISION")
-        );
+        return reclamoService.listarReclamos();
     }
 }
