@@ -1,0 +1,19 @@
+### Consultar todos los reclamos
+GET http://localhost:8080/api/reclamos
+Accept: application/json
+
+### Crear un nuevo reclamo
+POST http://localhost:8080/api/reclamos
+Content-Type: application/json
+
+{
+  "descripcion": "Semáforo fuera de servicio"
+}
+
+### Buscar un reclamo existente
+GET http://localhost:8080/api/reclamos/1
+Accept: application/json
+
+### Buscar un reclamo inexistente
+GET http://localhost:8080/api/reclamos/999
+Accept: application/json
