@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Service
@@ -18,6 +19,12 @@ public class ReclamoService {
 
     public synchronized List<Reclamo> listarReclamos() {
         return List.copyOf(reclamos);
+    }
+
+    public synchronized Optional<Reclamo> buscarPorId(Long id) {
+        return reclamos.stream()
+                .filter(reclamo -> reclamo.id().equals(id))
+                .findFirst();
     }
 
     public synchronized Reclamo crearReclamo(String descripcion) {
