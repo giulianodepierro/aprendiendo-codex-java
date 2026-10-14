@@ -46,6 +46,21 @@ class AprendiendoCodexJavaApplicationTests {
     }
 
     @Test
+    void buscarReclamoExistenteDevuelveSusDatos() throws Exception {
+        mockMvc.perform(get("/api/reclamos/1").accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(1))
+                .andExpect(jsonPath("$.descripcion").value("Demora en la entrega del producto"))
+                .andExpect(jsonPath("$.estado").value("PENDIENTE"));
+    }
+
+    @Test
+    void buscarReclamoInexistenteDevuelveNotFound() throws Exception {
+        mockMvc.perform(get("/api/reclamos/999").accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
     void crearReclamoDevuelveCreatedYLoIncluyeEnLaLista() throws Exception {
         String nuevoReclamo = "{\"descripcion\":\"Entrega incompleta\"}";
 
